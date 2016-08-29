@@ -5,4 +5,10 @@ MAINTAINER a.weber <a.weber@labor.digital>
 COPY import.sh /opt/import.sh
 RUN chmod +x /opt/import.sh
 
-CMD ["/opt/import.sh"]
+RUN apt-get update && apt-get install -y \
+	vim \
+	mysql-client \
+	curl \
+	netcat
+
+ENTRYPOINT ["/opt/import.sh"]
