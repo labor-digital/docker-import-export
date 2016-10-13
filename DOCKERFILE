@@ -1,6 +1,6 @@
 FROM ubuntu
 
-MAINTAINER a.weber <a.weber@labor.digital>
+MAINTAINER LABOR digital <info@labor.digital>
 
 RUN apt-get update
 RUN apt-get install -y vim
