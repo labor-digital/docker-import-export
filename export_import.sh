@@ -11,7 +11,7 @@ then
 	echo "Export started."
 	mkdir /var/www/html_import/data
 	rm -R -f /var/www/html_import/data/*
-	cp -R /var/www/html_data /var/www/html_import/data/*
+	cp -R /var/www/html_data/* /var/www/html_import/data
 	
 	mysqldump  --host="${APP_MYSQL_HOST}" --user='root' --password="${MYSQL_ROOT_PASSWORD}" "${APP_MYSQL_DATABASE}" > /var/www/html_import/dump.sql
 	
