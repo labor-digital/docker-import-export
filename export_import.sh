@@ -9,6 +9,7 @@ done
 if [ -f "/var/www/html_import/do_export" ]
 then
 	echo "Export started."
+	mkdir /var/www/html_import/data
 	rm -R -f /var/www/html_import/data/*
 	cp -R /var/www/html_data /var/www/html_import/data/*
 	
@@ -26,6 +27,9 @@ then
 			mysqldump  --host="${APP_MYSQL_HOST}" --user='root' --password="${MYSQL_ROOT_PASSWORD}" "${!APP_MYSQL_DATABASE_IDX_NAME}" > /var/www/html_import/dump_${idx}.sql
 		done
 	fi
+	
+	rm -f /var/www/html_import/do_export
+	echo "Export ready."
 else
 	echo "No Export."
 fi
