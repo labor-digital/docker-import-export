@@ -1,0 +1,26 @@
+clone:
+  depth: 1
+
+pipelines:
+  custom:
+    buildAndPush:
+      -
+        step: &buildAndPush
+          image:
+            name: 848331400135.dkr.ecr.eu-central-1.amazonaws.com/labor-prod-pipelines:build-docker-and-push-ecr
+            aws:
+              access-key: $AWS_ACCESS_KEY_ID
+              secret-key: $AWS_SECRET_ACCESS_KEY
+          name: Build and Push
+          caches:
+            - docker
+          services:
+            - docker
+          script:
+            - export BUILD_AND_PUSH_REGION=$AWS_ECR_DEFAULT_REGION
+            - export BUILD_AND_PUSH_IMAGE=$AWS_ECR_DEFAULT_URL/$PROJECT_NAME:latest
+            - source /opt/build-docker-and-push-ecr.sh
+  default:
+    -
+      step:
+        <<: *buildAndPush

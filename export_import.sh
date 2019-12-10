@@ -6,6 +6,31 @@ while ! nc -z $APP_MYSQL_HOST 3306; do
 done
 
 
+if [ -f "/var/www/html_import/do_export" ]
+then
+	echo "Export started."
+	rm -R -f /var/www/html_import/data/*
+	cp -R /var/www/html_data /var/www/html_import/data/*
+	
+	mysqldump  --host="${APP_MYSQL_HOST}" --user='root' --password="${MYSQL_ROOT_PASSWORD}" "${APP_MYSQL_DATABASE}" > /var/www/html_import/dump.sql
+	
+	if [ -z ${APP_MYSQL_DATABASE_COUNT+x} ]
+	then
+		APP_MYSQL_DATABASE_COUNT=1
+	fi
+	
+	if [ $APP_MYSQL_DATABASE_COUNT -gt 1 ]
+	then
+		for idx in $(seq 1 `expr $APP_MYSQL_DATABASE_COUNT - 1`)
+		do
+			mysqldump  --host="${APP_MYSQL_HOST}" --user='root' --password="${MYSQL_ROOT_PASSWORD}" "${!APP_MYSQL_DATABASE_IDX_NAME}" > /var/www/html_import/dump_${idx}.sql
+		done
+	fi
+else
+	echo "No Export."
+fi
+
+
 if [ -f "/var/www/html_import/do_import" ]
 then
 	echo "Import started."

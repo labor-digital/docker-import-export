@@ -8,7 +8,7 @@ RUN apt-get install -y mysql-client
 RUN apt-get install -y curl
 RUN apt-get install -y netcat
 
-COPY import.sh /opt/import.sh
-RUN chmod +x /opt/import.sh
+COPY export_import.sh /opt/export_import.sh
+RUN chmod +x /opt/export_import.sh
 
-ENTRYPOINT ["/opt/import.sh"]
+ENTRYPOINT ["/opt/export_import.sh"]
