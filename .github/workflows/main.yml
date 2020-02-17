@@ -13,7 +13,7 @@ jobs:
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag labordigital/unison:2.48.2
+        run: docker build . --file Dockerfile --tag labordigital/import-export:latest
       - name: Push the tagged Docker image
-        run: docker push labordigital/unison:2.48.2
+        run: docker push labordigital/import-export:latest
 
