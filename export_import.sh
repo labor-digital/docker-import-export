@@ -13,7 +13,7 @@ then
 	rm -R -f /var/www/html_import/data/*
 	cp -R /var/www/html_data/* /var/www/html_import/data
 	
-	mysqldump  --host="${APP_MYSQL_HOST}" --user='root' --password="${MYSQL_ROOT_PASSWORD}" "${APP_MYSQL_DATABASE}" > /var/www/html_import/dump.sql
+	mysqldump  --host="${APP_MYSQL_HOST}" --user='root' --password="${MYSQL_ROOT_PASSWORD}" -B "${APP_MYSQL_DATABASE}" > /var/www/html_import/dump.sql
 	
 	if [ -z ${APP_MYSQL_DATABASE_COUNT+x} ]
 	then
@@ -24,7 +24,7 @@ then
 	then
 		for idx in $(seq 1 `expr $APP_MYSQL_DATABASE_COUNT - 1`)
 		do
-			mysqldump  --host="${APP_MYSQL_HOST}" --user='root' --password="${MYSQL_ROOT_PASSWORD}" "${!APP_MYSQL_DATABASE_IDX_NAME}" > /var/www/html_import/dump_${idx}.sql
+			mysqldump  --host="${APP_MYSQL_HOST}" --user='root' --password="${MYSQL_ROOT_PASSWORD}" -B "${!APP_MYSQL_DATABASE_IDX_NAME}" > /var/www/html_import/dump_${idx}.sql
 		done
 	fi
 	
