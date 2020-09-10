@@ -15,10 +15,10 @@ then
 	
 	mysqldump  \
 		--host="${APP_MYSQL_HOST}" \
-		--user='root' --password="${MYSQL_ROOT_PASSWORD}" \
-		--databases "${APP_MYSQL_DATABASE}" \
+		--user='root' \
+		--password="${MYSQL_ROOT_PASSWORD}" \
 		--column-statistics=0 \
-		--no-create-db > /var/www/html_import/dump.sql
+		"${APP_MYSQL_DATABASE}" > /var/www/html_import/dump.sql
 	
 	if [ -z ${APP_MYSQL_DATABASE_COUNT+x} ]
 	then
@@ -33,9 +33,8 @@ then
 			--host="${APP_MYSQL_HOST}" \
 			--user='root' \
 			--password="${MYSQL_ROOT_PASSWORD}" \
-			--databases "${!APP_MYSQL_DATABASE_IDX_NAME}" \
 			--column-statistics=0 \
-			--no-create-db > /var/www/html_import/dump_${idx}.sql
+			"${!APP_MYSQL_DATABASE_IDX_NAME}" > /var/www/html_import/dump_${idx}.sql
 		done
 	fi
 	
