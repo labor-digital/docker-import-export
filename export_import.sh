@@ -15,7 +15,7 @@ then
 	
 	mysqldump  \
 		--host="${APP_MYSQL_HOST}" \
-		--user='root' --password="${MYSQL_ROOT_PASSWORD}" 
+		--user='root' --password="${MYSQL_ROOT_PASSWORD}" \
 		--databases "${APP_MYSQL_DATABASE}" \
 		--column-statistics=0 \
 		--no-create-db > /var/www/html_import/dump.sql
