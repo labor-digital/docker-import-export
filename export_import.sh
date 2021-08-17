@@ -48,9 +48,12 @@ fi
 if [ -f "/var/www/html_import/do_import" ]
 then
 	echo "Import started."
-	rm -R -f /var/www/html_data/*
-	cp -R /var/www/html_import/data/* /var/www/html_data
-	
+	if [ "$(ls -A /var/www/html_import/data)" ]
+	then
+	  rm -R -f /var/www/html_data/*
+	  cp -R /var/www/html_import/data/* /var/www/html_data
+	fi
+
 	sqlinitstr="DROP USER IF EXISTS ${APP_MYSQL_USER}@'%';
 CREATE USER ${APP_MYSQL_USER}@'%' IDENTIFIED BY '${APP_MYSQL_PASS}';
 DROP DATABASE IF EXISTS ${APP_MYSQL_DATABASE};
