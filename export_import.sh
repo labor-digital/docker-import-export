@@ -54,7 +54,7 @@ then
 	  cp -R /var/www/html_import/data/* /var/www/html_data
 	fi
 
-	sqlinitstr="DROP USER IF EXISTS ${APP_MYSQL_USER}@'%';
+	sqlinitstr="DROP USER ${APP_MYSQL_USER}@'%';
 CREATE USER ${APP_MYSQL_USER}@'%' IDENTIFIED BY '${APP_MYSQL_PASS}';
 DROP DATABASE IF EXISTS ${APP_MYSQL_DATABASE};
 CREATE DATABASE ${APP_MYSQL_DATABASE} CHARACTER SET utf8 COLLATE utf8_general_ci;
