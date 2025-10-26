@@ -12,6 +12,8 @@ then
 	mkdir /var/www/html_import/data
 	rm -R -f /var/www/html_import/data/*
 	cp -R /var/www/html_data/* /var/www/html_import/data
+	find /var/www/html_import -type f -name 'perms.set' -delete
+	chmod -R ugo=rwX /var/www/html_import/*
 	
 	mysqldump  \
 		--host="${APP_MYSQL_HOST}" \
